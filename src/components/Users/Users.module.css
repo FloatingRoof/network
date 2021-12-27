@@ -1,0 +1,10 @@
+.userPhoto{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.selectedPage{
+    color:red;
+    font-weight: bold;
+}

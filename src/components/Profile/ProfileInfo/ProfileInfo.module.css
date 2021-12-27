@@ -1,0 +1,111 @@
+.descriptionBlock {
+    height: 300px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.descriptionBlock .imageBlock{
+    background-color: #fff;
+    border-radius: 10px;
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-box-shadow: 0px 3px 5px 2px rgba(34, 60, 80, 0.15);
+    -moz-box-shadow: 0px 3px 5px 2px rgba(34, 60, 80, 0.15);
+    box-shadow: 0px 3px 5px 2px rgba(34, 60, 80, 0.15);
+
+}
+
+.descriptionBlock .imageBlock img {
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+
+.descriptionBlock .description{
+    width: calc(100% - 340px);
+    height: auto;
+
+}
+.wrapperDescription {
+    height: auto;
+    min-height: 100px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 15px;
+
+    -webkit-box-shadow: 0px 3px 5px 2px rgba(34, 60, 80, 0.15);
+    -moz-box-shadow: 0px 3px 5px 2px rgba(34, 60, 80, 0.15);
+    box-shadow: 0px 3px 5px 2px rgba(34, 60, 80, 0.15);
+}
+
+.descriptionBlock .description .name{
+    font-size: 20px;
+    font-weight: 500;
+    display: block;
+}
+.descriptionBlock .description .aboutMe{
+    font-size: 13px;
+    font-weight: lighter;
+    margin-top: 10px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+.descriptionBlock .description .aboutMe:hover{
+    opacity: 0.5;
+}
+
+
+.descriptionBlock .description .aboutMe .aboutAdd
+{
+    color:grey;
+}
+
+
+.descriptionBlock .description .line{
+    margin-right: 20px;
+    margin-left: 5px;
+    margin-top: 10px;
+    background-color: rgba(255, 126, 136, 0.61);
+    opacity: 0.2;
+}
+
+.descriptionBlock .description .workStatus{
+color: #50555c;
+    font-weight: 500;
+    font-size: 14px;
+    margin-top: 5px;
+}
+.descriptionBlock .description .DescriptionBlock{
+    margin-top: 5px;
+
+}
+
+.descriptionBlock .description .DescriptionTitle{
+    color:#6f7a91;
+}
+
+.descriptionBlock .description .social{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.descriptionBlock .description .social a{
+    color:#5d6576;
+    font-size: 26px;
+    height: 40px;
+    width: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.descriptionBlock .description .social a:hover .icon{
+    color:#373e4f;
+    font-size: 30px;
+}
