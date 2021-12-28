@@ -1,7 +1,6 @@
 @import-normalize; /* bring in normalize.css styles */
 
 /*@import "Reset.css";*/
-
 body {
     background-color: #eeeeee;
 }
