@@ -26,7 +26,6 @@ class ProfileContainer extends React.Component {
         isUser: true
     }
     componentDidMount() {
-
         let userId = this.props.params.userId ? this.props.params.userId : this.props.authorizedUserId;
         if(!userId) this.setState({isUser: false})
         this.props.getUserStatus(userId);
@@ -44,12 +43,12 @@ class ProfileContainer extends React.Component {
 };
 
 /*HOC*/
-
-let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
-
-
-let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent);
-
+//
+// let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
+//
+//
+// let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent);
+//
 
 let mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
