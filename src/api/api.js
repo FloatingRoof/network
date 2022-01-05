@@ -1,5 +1,4 @@
 import axios from "axios";
-const API_KEY = process.env.REACT_APP_API_KEY;
 
 
 const instance = axios.create({
@@ -7,22 +6,22 @@ const instance = axios.create({
     withCredentials: true,
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     headers: {
-    "API-KEY" : {API_KEY}
-}
+        "API-KEY": `${process.env.REACT_APP_API_KEY}`
+    }
 });
 
 
 export const usersAPI = {
-    getUsers(currentPage = 1, pageSize=10){
+    getUsers(currentPage = 1, pageSize = 10) {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`).then(response => response.data)
     },
-    follow(userId){
+    follow(userId) {
         return instance.post(`follow/${userId}`, {}).then(response => response.data)
     },
-    unfollow(userId){
+    unfollow(userId) {
         return instance.delete(`follow/${userId}`).then(response => response.data)
     },
-    getProfile(userId){
+    getProfile(userId) {
         console.warn('Obsolete method. Please profileAPI object')
         return profileAPI.getProfile(userId);
     },
@@ -30,25 +29,34 @@ export const usersAPI = {
 }
 
 export const profileAPI = {
-    getProfile(userId){
+    getProfile(userId) {
         return instance.get(`profile/${userId}`);
     },
-    getStatus(userId){
+    getStatus(userId) {
         return instance.get(`profile/status/${userId}`)
     },
-    updateStatus(status){
+    updateStatus(status) {
         return instance.put(`/profile/status`, {status: status});
+    },
+    savePhoto(photoFile) {
+        const formData = new FormData();
+        formData.append("image", photoFile);
+        return instance.put('profile/photo', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
     }
 }
 
 export const authAPI = {
-    authMe(){
+    authMe() {
         return instance.get('auth/me/').then(response => response.data);
     },
-    login(email,password,rememberMe = false){
-        return instance.post('auth/login',{email,password,rememberMe});
+    login(email, password, rememberMe = false) {
+        return instance.post('auth/login', {email, password, rememberMe});
     },
-    logout(email,password,rememberMe = false){
+    logout(email, password, rememberMe = false) {
         return instance.delete('auth/login').then(response => response.data);
     }
 }

@@ -6,7 +6,7 @@ import {login} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
 import {Navigate} from "react-router-dom";
 import TextError from "../common/TextError/TextError";
-
+import classes from "./Login.module.css"
 
 const LoginForm = (props) => {
 
@@ -17,8 +17,8 @@ const LoginForm = (props) => {
         rememberMe: false
     };
 
-    const onSubmit = (values, {setStatus} )=> {
-        props.login(values.email,values.password,values.rememberMe,setStatus);
+    const onSubmit = (values, {setStatus}) => {
+        props.login(values.email, values.password, values.rememberMe, setStatus);
         console.log('Submit', values)
     };
 
@@ -33,27 +33,35 @@ const LoginForm = (props) => {
 
     return (
         <Formik initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={onSubmit}>
-            {formik =>{
-                return(
+                validationSchema={validationSchema}
+                onSubmit={onSubmit}>
+            {formik => {
+                return (
                     <Form>
-                        <div>
-                            <FormikControl control="input" type="email" name="email" name="email"
-                                   placeholder={"Email"} />
+                        <div className={classes.field}>
+                            <FormikControl error={formik.touched.email && formik.errors.email} label="Email"
+                                           control="input" type="email" name="email" name="email"
+                            />
                         </div>
-                        <div>
-                            <FormikControl control="input" type="password"  name="password"
-                                   placeholder={"Password"} />
+                        <div className={classes.field}>
+                            <FormikControl error={formik.touched.password && formik.errors.password} control="input"
+                                           type="password" name="password"
+                                           label={"Password"}/>
                         </div>
-                        <div>
-                            <FormikControl control="input"  type="checkbox"
-                                    name="rememberMe" /> remember me
+                        <div className={classes.field}>
+                            <FormikControl control="checkBox"
+                                           label="Remember me" name="rememberMe"/>
                         </div>
-                        <div>
-                            <button type='submit' disabled={!formik.isValid}>Login</button>
+                        <div className={classes.blockButton}>
+                            <button className={classes.button} type='submit' disabled={!formik.isValid}>
+                                LOGIN
+                            </button>
                         </div>
-                        <TextError>{formik.status}</TextError>
+                        <div className={classes.blockError}>
+                            <TextError>{formik.status}</TextError>
+                        </div>
+
+
                     </Form>
                 )
             }}
@@ -62,18 +70,20 @@ const LoginForm = (props) => {
 }
 
 const Login = (props) => {
-    if(props.isAuth) return <Navigate to="/profile"/>
+    if (props.isAuth) return <Navigate to="/profile"/>
     return (
-        <div>
-            <h1>Login</h1>
-            <LoginForm login={props.login}/>
+        <div className={"content-block " + classes.mainBlock}>
+            <div>
+                <h1>Login</h1>
+                <LoginForm login={props.login}/>
+            </div>
         </div>
     );
 }
 
 
 let mapStateToProps = (state) => {
-    return{
+    return {
         isAuth: state.auth.isAuth,
     }
 }

@@ -5,7 +5,6 @@ import AddNewPostForm from "./AddNewPostForm/AddNewPostForm";
 
 
 const MyPosts = (props) => {
-    console.log('render');
     let postElements = props.posts.slice().reverse().map(p => <Post message={p.post} likesCount={p.likesCount}
                                                   dislikesCount={p.dislikesCount} key={p.id}/>)
     /* Work with Ref

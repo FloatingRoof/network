@@ -3,7 +3,6 @@ import "./components/common/FontawsomeIcons/FontAwesome"
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
-import Settings from "./components/Settings/Settings";
 import NavBarContainer from "./components/NavBar/NavBarContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
@@ -13,10 +12,13 @@ import {initializedApp} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import {compose} from "redux";
 import store from "./redux/redux-store";
+import ProfileContainerHook from "./components/Profile/ProfileContainerHOOK";
 
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const Login = React.lazy(() => import('./components/Login/Login'));
+const SettingsContainer = React.lazy(() => import('./components/Settings/SettingsContainer'));
+
 
 const App = (props) => {
 
@@ -33,15 +35,14 @@ const App = (props) => {
             <NavBarContainer/>
             <div className='app-wrapper-content'>
                 <Suspense fallback={<Preloader/>}>
-
                     <Routes>
-                        <Route exact path='/profile/' element={<ProfileContainer/>}>
-                            <Route path=":userId" element={<ProfileContainer/>}/>
+                        <Route exact path='/profile/' element={<ProfileContainerHook />}>
+                            <Route path=":userId" element={<ProfileContainerHook/>}/>
                         </Route>
                         <Route path='/dialogs/*' element={<DialogsContainer/>}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/music' element={<Music/>}/>
-                        <Route path='/settings' element={<Settings/>}/>
+                        <Route path='/settings' element={<SettingsContainer/>}/>
                         <Route path='/users' element={<UsersContainer/>}/>
                         <Route path='/login' element={<Login/>}/>
                         {/*Для ошибки 404*/}
@@ -62,7 +63,7 @@ const mapStateToProps = (state) => ({
 let AppContainer = compose(connect(mapStateToProps, {initializedApp}))(App);
 
 const SocialApp = (props) => {
-    return <BrowserRouter>
+    return <BrowserRouter >
         <Provider store={store}>
             <AppContainer/>
         </Provider>

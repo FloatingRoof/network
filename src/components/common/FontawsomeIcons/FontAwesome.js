@@ -7,8 +7,8 @@ import {
     faGuitar,
     faSlidersH,
     faHeart,
-    faHeartBroken, faUserFriends, faSearch, faChalkboardTeacher
+    faHeartBroken, faUserFriends, faSearch, faChalkboardTeacher, faLink, faCog
 } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faDragon, faPaperPlane, faComments, faGuitar, faSlidersH, faHeart, faHeartBroken, faUserFriends, faSearch, faTwitter, faFacebookF, faChalkboardTeacher, faVk,faInstagram,faYoutube,faGithub);
+library.add(faDragon, faPaperPlane, faComments, faGuitar, faSlidersH, faHeart, faHeartBroken, faUserFriends, faSearch, faTwitter, faFacebookF, faChalkboardTeacher, faVk, faInstagram, faYoutube, faGithub, faLink,faCog);
 

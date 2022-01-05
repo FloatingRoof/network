@@ -10,7 +10,7 @@ const ProfileStatusWithHooks = (props) => {
 
     useEffect(() => {
         setStatus(props.status);
-    },[props.status])
+    }, [props.status])
 
     const activateEditMode = () => {
         setEditMode(true);
@@ -28,18 +28,28 @@ const ProfileStatusWithHooks = (props) => {
 
     return (
         <>
-            {!editMode &&
-            <div>
-                        <span onClick={activateEditMode} className={classes.aboutMe}>{props.status ? props.status :
-                            <span className={classes.aboutAdd}>Установить статус</span>} </span>
-            </div>
+            {
+                props.isOwner ?
+                    <>
+                        {!editMode &&
+                        <div>
+                        <span onClick={activateEditMode} className={classes.aboutMe + " " + classes.aboutMeForEdit}>{(props.status) ? props.status :
+                            <span className={classes.aboutAdd}>Set status</span>} </span>
+                        </div>
+                        }
+                        {editMode &&
+                        <div>
+                            <input value={status} autoFocus={true} onChange={onStatusChange} onBlur={deactivateEditMode}
+                            />
+                        </div>
+                        }
+                    </>
+                    :
+                    <>
+                        {props.status && <span className={classes.aboutMe}>{props.status}</span>}
+                    </>
             }
-            {editMode &&
-            <div>
-                <input value={status} autoFocus={true} onChange={onStatusChange} onBlur={deactivateEditMode}
-                />
-            </div>
-            }
+
         </>
     );
 }

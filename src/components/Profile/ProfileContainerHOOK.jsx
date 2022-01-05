@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Profile from "./Profile";
 import {
     getUserStatus,
@@ -26,36 +26,36 @@ const withRouter = WrappedComponent => props => {
 };
 
 
-class ProfileContainer extends React.Component {
+const ProfileContainerHook = (props) => {
 
-    state = {
-        isAuthUser: true
-    }
+    let [id, setId] = useState(-1);
 
-    refreshProfile() {
-        console.log('dsd');
-        let userId = this.props.params.userId ? this.props.params.userId : this.props.authorizedUserId;
-        if (!userId) this.setState({isAuthUser: false})
-        this.props.getUserStatus(userId);
-        this.props.getUserProfile(userId);
-    }
 
-    componentDidMount() {
-        this.refreshProfile();
-    }
+    useEffect(() => {
+            console.log("выфв")
+            let userId = props.params.userId ? props.params.userId : props.authorizedUserId;
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if ((prevProps.params.userId !== this.props.params.userId) || (prevProps.isAuth != this.props.isAuth)) {
-            this.refreshProfile();
+            if (props.profile)
+                if (props.profile.userId != userId)
+                    props.deleteUserProfile();
+            props.getUserStatus(userId);
+            props.getUserProfile(userId);
+            setId(userId);
         }
-    }
+        , [props.params.userId])
 
-    render() {
-        if (!this.state.isAuthUser) return <Navigate to="/login"/>
-        return (
-            <Profile isOwner={!this.props.params.userId} {...this.props} /*profile={this.props.profile}*/ />
-        )
-    };
+    useEffect(() => {
+
+    })
+
+    return (
+        <>
+            {id ? !props.profile ? <Preloader/> :
+                <Profile isOwner={!props.params.userId} {...props} /*profile={this.props.profile}*/ /> :
+                <Navigate to={"/login"}/>}
+        </>
+    )
+
 };
 
 /*HOC*/
@@ -71,7 +71,7 @@ let mapStateToProps = (state) => ({
     status: state.profilePage.status,
     authorizedUserId: state.auth.id,
     isAuth: state.auth.isAuth,
-    idUser: state.auth.id
+
 })
 
 // let ProfileMatch = (props) => {
@@ -83,6 +83,6 @@ export default compose(
     connect(mapStateToProps, {getUserProfile, getUserStatus, updateUserStatus, savePhoto, deleteUserProfile}),
     withRouter,
     /* withAuthRedirect*/
-)(ProfileContainer);
+)(ProfileContainerHook);
 
 

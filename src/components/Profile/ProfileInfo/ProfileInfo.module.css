@@ -5,7 +5,7 @@
 }
 
 
-.descriptionBlock .imageBlock{
+.descriptionBlock .imageBlock {
     background-color: #fff;
     border-radius: 10px;
     width: 300px;
@@ -15,6 +15,10 @@
     -webkit-box-shadow: 0px 3px 5px 2px rgba(34, 60, 80, 0.15);
     -moz-box-shadow: 0px 3px 5px 2px rgba(34, 60, 80, 0.15);
     box-shadow: 0px 3px 5px 2px rgba(34, 60, 80, 0.15);
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    position: relative;
 
 }
 
@@ -25,12 +29,53 @@
     border-radius: 6px;
 }
 
+.descriptionBlock .imageBlock:hover .upload {
+    background-color: rgba(0, 0, 0, 0.5);
+    visibility: visible;
+    transition: all 300ms ease-in-out;
 
-.descriptionBlock .description{
+}
+
+.descriptionBlock .imageBlock:hover .upload label{
+    opacity: 1;
+    transition: all 300ms ease-in-out;
+}
+
+.descriptionBlock .imageBlock .upload {
+    position: absolute;
+    border-radius: 6px;
+    left: 0;
+    bottom: 0px;
+    width: calc(100% - 20px);
+    height: 50%;
+    visibility: hidden;
+    margin: 0 10px 10px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 300ms ease-in-out;
+}
+
+.descriptionBlock .imageBlock .upload label {
+    font-size: 20px;
+    cursor: pointer;
+    color: #fff;
+    opacity: 0;
+    transition: all 300ms ease-in-out;
+
+}
+
+.descriptionBlock .imageBlock input {
+    width: 0;
+    height: 0;
+}
+
+.descriptionBlock .description {
     width: calc(100% - 340px);
     height: auto;
 
 }
+
 .wrapperDescription {
     height: auto;
     min-height: 100px;
@@ -43,60 +88,69 @@
     box-shadow: 0px 3px 5px 2px rgba(34, 60, 80, 0.15);
 }
 
-.descriptionBlock .description .name{
+.descriptionBlock .description .name {
     font-size: 20px;
     font-weight: 500;
-    display: block;
+    display: inline-block;
 }
-.descriptionBlock .description .aboutMe{
+
+.descriptionBlock .settings{
+    float:right;
+    font-size: 18px;
+    color: #5d6576;
+    padding-right: 5px;
+}
+.descriptionBlock .description .aboutMe {
     font-size: 13px;
     font-weight: lighter;
     margin-top: 10px;
-    margin-left: 5px;
-    cursor: pointer;
+
 }
-.descriptionBlock .description .aboutMe:hover{
+
+.descriptionBlock .description .aboutMeForEdit:hover {
     opacity: 0.5;
+    cursor: pointer;
+
 }
 
 
-.descriptionBlock .description .aboutMe .aboutAdd
-{
-    color:grey;
+.descriptionBlock .description .aboutMe .aboutAdd {
+    color: grey;
 }
 
 
-.descriptionBlock .description .line{
+.descriptionBlock .description .line {
     margin-right: 20px;
-    margin-left: 5px;
-    margin-top: 10px;
-    background-color: rgba(255, 126, 136, 0.61);
-    opacity: 0.2;
+    background-color: #ebebeb;
+    border: 0;
+    height: 1px;
 }
 
-.descriptionBlock .description .workStatus{
-color: #50555c;
+.descriptionBlock .description .workStatus {
+    color: #50555c;
     font-weight: 500;
     font-size: 14px;
     margin-top: 5px;
 }
-.descriptionBlock .description .DescriptionBlock{
+
+.descriptionBlock .description .DescriptionBlock {
     margin-top: 5px;
 
 }
 
-.descriptionBlock .description .DescriptionTitle{
-    color:#6f7a91;
+.descriptionBlock .description .DescriptionTitle {
+    color: #6f7a91;
 }
 
-.descriptionBlock .description .social{
+.descriptionBlock .description .social {
     margin-top: 20px;
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
 }
-.descriptionBlock .description .social a{
-    color:#5d6576;
+
+.descriptionBlock .description .social a {
+    color: #5d6576;
     font-size: 26px;
     height: 40px;
     width: 55px;
@@ -105,7 +159,7 @@ color: #50555c;
     align-items: center;
 }
 
-.descriptionBlock .description .social a:hover .icon{
-    color:#373e4f;
+.descriptionBlock .description .social a:hover .icon {
+    color: #373e4f;
     font-size: 30px;
 }

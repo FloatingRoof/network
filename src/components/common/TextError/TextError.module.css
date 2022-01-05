@@ -1,3 +1,6 @@
-.error{
-color:red;
+.error {
+    color: #f84444;
+    margin-top: 5px;
+    margin-left: 10px;
+    font-size: 18px;
 }
