@@ -2,7 +2,7 @@ import Settings from "./Settings";
 import {Navigate} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
-import {deleteUserProfile, getUserProfile} from "../../redux/profile-reducer";
+import {deleteUserProfile, getUserProfile, saveProfile} from "../../redux/profile-reducer";
 import Preloader from "../common/Preloader/Preloader";
 
 const SettingsContainer = (props) => {
@@ -39,4 +39,4 @@ let mapStateToProps = (state) => ({
 
 })
 
-export default connect(mapStateToProps, {getUserProfile, deleteUserProfile})(SettingsContainer)
+export default connect(mapStateToProps, {getUserProfile, deleteUserProfile,saveProfile})(SettingsContainer)

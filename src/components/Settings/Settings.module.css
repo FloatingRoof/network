@@ -1,11 +1,76 @@
+.mainBlock{
+    width: 380px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
 
-.head{
+
+.head {
     margin-bottom: 0;
 }
 
- .line{
+.line {
     margin-right: 20px;
+    width: 100%;
     background-color: #ebebeb;
     border: 0;
     height: 1px;
+}
+
+
+.block {
+    margin-top: 30px;
+}
+
+.button{
+    text-decoration: none;
+    display: inline-block;
+    width: 140px;
+    min-height: 45px;
+    line-height: 45px;
+    border-radius: 5px;
+    margin: 10px 20px;
+    font-size: 11px;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 3px;
+    font-weight: 600;
+    color: #524f4e;
+    background: #b8c5d0;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, .1);
+    transition: .3s;
+    border: none;
+    cursor: pointer;
+}
+
+
+
+.blockButton{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+.blockButton .button:hover {
+    background: #6f7a91;
+    box-shadow: 0 10px 15px #424856;
+    color: white;
+}
+
+.button:disabled,
+.button[disabled]{
+    background: #6f7a91;
+}
+
+.blockError{
+     text-align: center;
+     margin-top: 15px;
+ }
+
+.goodMessage{
+    color: #197f19;
+}
+
+.load{
+    width: 10px;
 }

@@ -1,4 +1,6 @@
 import {profileAPI, usersAPI} from "../api/api";
+import {getAuthUserData} from "./auth-reducer";
+
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
@@ -51,12 +53,12 @@ const profileReducer = (state = initialState, action) => {
                 posts: [...state.posts.filter(p => p.id != action.postId)]
             }
         }
-        case SAVE_PHOTO_SUCCESS:{
+        case SAVE_PHOTO_SUCCESS: {
             return {
-            ...state,  profile: {...state.profile, photos: action.photos}
+                ...state, profile: {...state.profile, photos: action.photos}
             }
         }
-        case DELETE_USER_PROFILE:{
+        case DELETE_USER_PROFILE: {
             return {
                 ...state, profile: null
             }
@@ -75,12 +77,26 @@ export const getUserProfile = (userId) => async (dispatch) => {
 }
 export const savePhoto = (file) => async (dispatch) => {
     let response = await profileAPI.savePhoto(file);
-    dispatch(savePhotoSuccess(response.data.data.photos));
+    if (response.data.resultCode === 0) {
 
+        dispatch(savePhotoSuccess(response.data.data.photos));
+    }
+}
+
+export const saveProfile = (profile, setStatus) => async (dispatch) => {
+    let response = await profileAPI.saveProfile(profile);
+    if (response.data.resultCode === 0) {
+        setStatus("Profile data updated");
+        dispatch(getAuthUserData())
+    } else {
+        let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error';
+        setStatus(message);
+    }
 }
 
 export const getUserStatus = (userId) => async (dispatch) => {
     let response = await profileAPI.getStatus(userId);
+
     dispatch(setUserStatus(response.data));
 }
 export const updateUserStatus = (status) => async (dispatch) => {

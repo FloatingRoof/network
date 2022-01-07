@@ -40,7 +40,7 @@ const LoginForm = (props) => {
                     <Form>
                         <div className={classes.field}>
                             <FormikControl error={formik.touched.email && formik.errors.email} label="Email"
-                                           control="input" type="email" name="email" name="email"
+                                           control="input" type="email" name="email"
                             />
                         </div>
                         <div className={classes.field}>
@@ -53,7 +53,7 @@ const LoginForm = (props) => {
                                            label="Remember me" name="rememberMe"/>
                         </div>
                         <div className={classes.blockButton}>
-                            <button className={classes.button} type='submit' disabled={!formik.isValid}>
+                            <button className={classes.button} type='submit' disabled={!formik.isValid || formik.isSubmitting}>
                                 LOGIN
                             </button>
                         </div>

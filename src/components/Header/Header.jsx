@@ -5,11 +5,6 @@ import {Navigate} from "react-router";
 const Header = (props) => {
 
 
-    let onClickLogout = () =>{
-        props.logout();
-        return <Navigate to={"/login"}/>
-    }
-
     return (
         <header className={classes.header}>
 

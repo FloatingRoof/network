@@ -5,6 +5,7 @@ import userPhoto from "../../../assets/images/user.png";
 import React from "react";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import {NavLink} from "react-router-dom";
+import {socialIcons} from "../../../utils/socialIcon";
 
 const ProfileInfo = (props) => {
     if (!props.profile)
@@ -14,7 +15,6 @@ const ProfileInfo = (props) => {
             props.savePhoto(e.target.files[0]);
         }
     }
-
 
     return (
         <div>
@@ -60,16 +60,7 @@ const ProfileInfo = (props) => {
 
 const ProfileData = (props) => {
 
-    let icons = {
-        facebook: ['fab', 'facebook-f'],
-        twitter: ['fab', 'twitter'],
-        instagram: ['fab', 'instagram'],
-        youtube: ['fab', 'youtube'],
-        website: "chalkboard-teacher",
-        github: ['fab', 'github'],
-        vk: ['fab', 'vk'],
-        mainLink: "link"
-    }
+
 
     return (
         <>
@@ -94,7 +85,7 @@ const ProfileData = (props) => {
 
                 {Object.keys(props.profile.contacts).map(key => {
                     return <Contact key={key} contact={props.profile.contacts[key]} title={key}
-                                    icon={icons[key]}/>
+                                    icon={socialIcons[key]}/>
                 })}
             </div>
         </>

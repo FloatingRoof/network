@@ -5,8 +5,8 @@ import AddNewPostForm from "./AddNewPostForm/AddNewPostForm";
 
 
 const MyPosts = (props) => {
-    let postElements = props.posts.slice().reverse().map(p => <Post message={p.post} likesCount={p.likesCount}
-                                                  dislikesCount={p.dislikesCount} key={p.id}/>)
+    let postElements = props.posts.slice().reverse().map(p => <Post key={p.id} message={p.post} likesCount={p.likesCount}
+                                                  dislikesCount={p.dislikesCount} />)
     /* Work with Ref
         let newPostElement = React.createRef();
         let text = newPostElement.current.value;
