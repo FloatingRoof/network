@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import {Navigate} from "react-router-dom";
 import TextError from "../common/TextError/TextError";
 import classes from "./Login.module.css"
+import Preloader from "../common/Preloader/Preloader";
 
 const LoginForm = (props) => {
 
@@ -14,12 +15,14 @@ const LoginForm = (props) => {
     const initialValues = {
         email: '',
         password: '',
-        rememberMe: false
+        rememberMe: false,
+        captcha: ""
     };
 
-    const onSubmit = (values, {setStatus}) => {
-        props.login(values.email, values.password, values.rememberMe, setStatus);
-        console.log('Submit', values)
+    const onSubmit = async (values, {setStatus, setSubmitting}) => {
+        setStatus("");
+        await props.login(values.email, values.password, values.rememberMe, values.captcha, setStatus);
+        setSubmitting(false);
     };
 
 
@@ -52,9 +55,20 @@ const LoginForm = (props) => {
                             <FormikControl control="checkBox"
                                            label="Remember me" name="rememberMe"/>
                         </div>
+                        {props.captchaUrl &&
+                        <div className={classes.field}>
+                            <img className={classes.captcha} src={props.captchaUrl}/>
+                            <FormikControl control="input"
+                                           name="captcha" label="Captcha"/>
+                        </div>
+                        }
                         <div className={classes.blockButton}>
-                            <button className={classes.button} type='submit' disabled={!formik.isValid || formik.isSubmitting}>
-                                LOGIN
+                            <button className={classes.button} type='submit'
+                                    disabled={!formik.isValid || formik.isSubmitting}>
+                                {formik.isSubmitting ?
+                                    <Preloader w="45px" h="45px"/>
+                                    : "LOGIN"
+                                }
                             </button>
                         </div>
                         <div className={classes.blockError}>
@@ -75,7 +89,7 @@ const Login = (props) => {
         <div className={"content-block " + classes.mainBlock}>
             <div>
                 <h1>Login</h1>
-                <LoginForm login={props.login}/>
+                <LoginForm login={props.login} captchaUrl={props.captchaUrl}/>
             </div>
         </div>
     );
@@ -84,7 +98,8 @@ const Login = (props) => {
 
 let mapStateToProps = (state) => {
     return {
-        isAuth: state.auth.isAuth,
+        captchaUrl: state.auth.captchaUrl,
+        isAuth: state.auth.isAuth
     }
 }
 

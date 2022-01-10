@@ -39,7 +39,7 @@ const ProfileInfo = (props) => {
                             {
                                 props.isOwner &&
                                 <NavLink className={classes.settings} title="settings" to="/settings">
-                                    <FontAwesomeIcon icon="cog"/>
+                                    <FontAwesomeIcon className={classes.icon} icon="cog"/>
                                 </NavLink>
                             }
                         </div>

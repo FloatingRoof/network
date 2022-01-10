@@ -39,8 +39,18 @@
     color: white;
 }
 
+.button:disabled,
+.button[disabled]{
+    background: #6f7a91;
+}
+
 .blockError{
     text-align: center;
     margin-top: 15px;
 }
 
+.captcha{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

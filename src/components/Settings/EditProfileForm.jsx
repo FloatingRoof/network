@@ -9,7 +9,6 @@ import Preloader from "../common/Preloader/Preloader";
 import {socialIcons} from "../../utils/socialIcon";
 
 const EditProfileForm = (props) => {
-
     const initialValues = {
         fullName: props.fullName,
         lookingForAJob: props.lookingForAJob,
@@ -27,7 +26,9 @@ const EditProfileForm = (props) => {
 
     const validationSchema = Yup.object(
         {
-            fullName: Yup.string().required('Required')
+            fullName: Yup.string().required('Required'),
+            lookingForAJobDescription: Yup.string().required("Required"),
+            aboutMe: Yup.string().required("Required")
         }
     )
 
