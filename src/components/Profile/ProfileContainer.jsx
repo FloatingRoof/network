@@ -35,9 +35,14 @@ class ProfileContainer extends React.Component {
     refreshProfile() {
         console.log('dsd');
         let userId = this.props.params.userId ? this.props.params.userId : this.props.authorizedUserId;
-        if (!userId) this.setState({isAuthUser: false})
-        this.props.getUserStatus(userId);
-        this.props.getUserProfile(userId);
+        if (!userId) {
+            this.setState({isAuthUser: false})
+        }else
+        {
+            this.props.getUserStatus(userId);
+            this.props.getUserProfile(userId);
+        }
+
     }
 
     componentDidMount() {

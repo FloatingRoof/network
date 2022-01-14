@@ -1,20 +1,17 @@
 import classes from './NavBar.module.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {NavLink} from "react-router-dom";
-import Friend from "./Friend/Friend";
+import cn from "classnames"
 
 
 
 
 const NavBar = (props) => {
-
-    let friendsElements= props.sidebar.friends.map(f => <Friend photo={f.photo} id={f.id} name={f.name} key={f.id}/>)
-
     return (
         <nav className={classes.nav}>
             <ul className={classes.side_bar_ul}>
                 <li className={classes.item}>
-                    <NavLink className={(navData) => navData.isActive ? classes.active : classes.item} to="/profile">
+                        <NavLink className={(navData) => navData.isActive ? classes.active : classes.item} to="/profile">
                         <div>
                             <FontAwesomeIcon className={classes.icon} icon="dragon"/>
                         </div>
@@ -76,7 +73,6 @@ const NavBar = (props) => {
 
                 <li>
                     <ul className={classes.side_bar_friends}>
-                        { friendsElements }
                     </ul>
                 </li>
             </ul>

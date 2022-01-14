@@ -116,6 +116,7 @@
 
 .descriptionBlock .description .aboutMe .aboutAdd {
     color: grey;
+    overflow-wrap: anywhere;
 }
 
 

@@ -13,6 +13,8 @@ import Preloader from "./components/common/Preloader/Preloader";
 import {compose} from "redux";
 import store from "./redux/redux-store";
 import ProfileContainerHook from "./components/Profile/ProfileContainerHOOK";
+import {Navigate} from "react-router-dom";
+import * as Swal from "sweetalert2";
 
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
@@ -25,6 +27,22 @@ const App = (props) => {
     useEffect(() => {
         props.initializedApp();
     }, [props.initialized]);
+    function catchAllUnhandledErrors(event) {
+        Swal.fire({
+            icon: 'error',
+            title: 'An unexpected error has occurred',
+            text: event.reason,
+        });
+    }
+    useEffect(() => {
+         window.addEventListener("unhandledrejection", catchAllUnhandledErrors);
+         console.log("hel")
+        // Указываем, как сбросить этот эффект:
+        return function cleanup() {
+            window.removeEventListener("unhandledrejection", catchAllUnhandledErrors);
+            console.log("del")
+        };
+    });
 
 
     if (!props.initialized)
@@ -34,19 +52,19 @@ const App = (props) => {
             <HeaderContainer/>
             <NavBarContainer/>
             <div className='app-wrapper-content'>
-                <Suspense fallback={<Preloader/>}>
+                <Suspense fallback={ <Preloader/> }>
                     <Routes>
-                        <Route exact path='/profile/' element={<ProfileContainerHook />}>
+                        <Route path="/" element={ <Navigate replace to="/profile"/> }/>
+                        <Route exact path='/profile/' element={<ProfileContainerHook/>}>
                             <Route path=":userId" element={<ProfileContainerHook/>}/>
                         </Route>
-                        <Route path='/dialogs/*' element={<DialogsContainer/>}/>
+                        <Route path='/dialogs' element={<DialogsContainer/>}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/music' element={<Music/>}/>
                         <Route path='/settings' element={<SettingsContainer/>}/>
                         <Route path='/users' element={<UsersContainer/>}/>
                         <Route path='/login' element={<Login/>}/>
-                        {/*Для ошибки 404*/}
-                        {/*<Route path='*' element={...}/>*/}
+                        <Route path='*' element={<div>404 NOT FOUND</div>}/>
                     </Routes>
                 </Suspense>
 
@@ -63,7 +81,7 @@ const mapStateToProps = (state) => ({
 let AppContainer = compose(connect(mapStateToProps, {initializedApp}))(App);
 
 const SocialApp = (props) => {
-    return <BrowserRouter >
+    return <BrowserRouter>
         <Provider store={store}>
             <AppContainer/>
         </Provider>

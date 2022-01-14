@@ -8,7 +8,7 @@ import {Navigate} from "react-router-dom";
 import TextError from "../common/TextError/TextError";
 import classes from "./Login.module.css"
 import Preloader from "../common/Preloader/Preloader";
-
+import cn from "classnames"
 const LoginForm = (props) => {
 
 
@@ -86,7 +86,7 @@ const LoginForm = (props) => {
 const Login = (props) => {
     if (props.isAuth) return <Navigate to="/profile"/>
     return (
-        <div className={"content-block " + classes.mainBlock}>
+        <div className={cn("content-block", classes.mainBlock)}>
             <div>
                 <h1>Login</h1>
                 <LoginForm login={props.login} captchaUrl={props.captchaUrl}/>

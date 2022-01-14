@@ -13,6 +13,7 @@ const SettingsContainer = (props) => {
                 props.deleteUserProfile();
             }
         }
+        if(props.id)
         props.getUserProfile(props.id)
     }, [props.id]);
     const a = < Preloader/>

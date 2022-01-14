@@ -32,12 +32,14 @@ const ProfileContainerHook = (props) => {
 
 
     useEffect(() => {
-            console.log("выфв")
             let userId = props.params.userId ? props.params.userId : props.authorizedUserId;
             props.deleteUserProfile();
-            props.getUserStatus(userId);
-            props.getUserProfile(userId);
+            if(userId){
+                props.getUserStatus(userId);
+                props.getUserProfile(userId);
+            }
             setId(userId);
+
         }
         , [props.params.userId, props.authorizedUserId])
 
