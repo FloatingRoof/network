@@ -32,14 +32,16 @@ const ProfileContainerHook = (props) => {
 
 
     useEffect(() => {
+
             let userId = props.params.userId ? props.params.userId : props.authorizedUserId;
-            props.deleteUserProfile();
-            if(userId){
+            if (userId) {
                 props.getUserStatus(userId);
                 props.getUserProfile(userId);
             }
             setId(userId);
-
+            return function () {
+                props.deleteUserProfile();
+            }
         }
         , [props.params.userId, props.authorizedUserId])
 
@@ -49,6 +51,7 @@ const ProfileContainerHook = (props) => {
 
     return (
         <>
+
             {id ? !props.profile ? <Preloader/> :
                 <Profile isOwner={!props.params.userId} {...props} /*profile={this.props.profile}*/ /> :
                 <Navigate to={"/login"}/>}

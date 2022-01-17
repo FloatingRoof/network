@@ -14,7 +14,7 @@ import {compose} from "redux";
 import store from "./redux/redux-store";
 import ProfileContainerHook from "./components/Profile/ProfileContainerHOOK";
 import {Navigate} from "react-router-dom";
-import * as Swal from "sweetalert2";
+import {errorMessage} from "./utils/errorMessage";
 
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
@@ -28,19 +28,13 @@ const App = (props) => {
         props.initializedApp();
     }, [props.initialized]);
     function catchAllUnhandledErrors(event) {
-        Swal.fire({
-            icon: 'error',
-            title: 'An unexpected error has occurred',
-            text: event.reason,
-        });
+        errorMessage(event.reason);
     }
     useEffect(() => {
          window.addEventListener("unhandledrejection", catchAllUnhandledErrors);
-         console.log("hel")
         // Указываем, как сбросить этот эффект:
         return function cleanup() {
             window.removeEventListener("unhandledrejection", catchAllUnhandledErrors);
-            console.log("del")
         };
     });
 
@@ -54,16 +48,16 @@ const App = (props) => {
             <div className='app-wrapper-content'>
                 <Suspense fallback={ <Preloader/> }>
                     <Routes>
-                        <Route path="/" element={ <Navigate replace to="/profile"/> }/>
-                        <Route exact path='/profile/' element={<ProfileContainerHook/>}>
-                            <Route path=":userId" element={<ProfileContainerHook/>}/>
+                        <Route path="/" element={ <Navigate replace to="/profile" /> }/>
+                        <Route exact path='/profile/' element={<ProfileContainerHook />}>
+                            <Route path=":userId" element={<ProfileContainerHook />}/>
                         </Route>
-                        <Route path='/dialogs' element={<DialogsContainer/>}/>
-                        <Route path='/news' element={<News/>}/>
-                        <Route path='/music' element={<Music/>}/>
-                        <Route path='/settings' element={<SettingsContainer/>}/>
-                        <Route path='/users' element={<UsersContainer/>}/>
-                        <Route path='/login' element={<Login/>}/>
+                        <Route path='/dialogs' element={<DialogsContainer />}/>
+                        <Route path='/news' element={<News />}/>
+                        <Route path='/music' element={<Music />}/>
+                        <Route path='/settings' element={<SettingsContainer />}/>
+                        <Route path='/users' element={<UsersContainer />}/>
+                        <Route path='/login' element={<Login />}/>
                         <Route path='*' element={<div>404 NOT FOUND</div>}/>
                     </Routes>
                 </Suspense>

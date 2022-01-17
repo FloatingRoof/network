@@ -1,5 +1,6 @@
 import {profileAPI, usersAPI} from "../api/api";
 import {getAuthUserData} from "./auth-reducer";
+import {errorMessage} from "../utils/errorMessage";
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -8,6 +9,7 @@ const DELETE_POST = 'DELETE_POST';
 const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS';
 const DELETE_USER_PROFILE = 'DELETE_USER_PROFILE'
 // Инициализируем стор по умолчанию
+
 let initialState = {
     posts: [
         {id: 1, post: 'Hi, how are you?', likesCount: 12, dislikesCount: 3},
@@ -69,19 +71,19 @@ const profileReducer = (state = initialState, action) => {
 }
 
 /*ThunkCreators*/
-
 export const getUserProfile = (userId) => async (dispatch) => {
     let response = await usersAPI.getProfile(userId);
     dispatch(setUserProfile(response.data));
-
 }
+
+
 export const savePhoto = (file) => async (dispatch) => {
     let response = await profileAPI.savePhoto(file);
     if (response.data.resultCode === 0) {
-
         dispatch(savePhotoSuccess(response.data.data.photos));
     }
 }
+
 
 export const saveProfile = (profile, setStatus) => async (dispatch) => {
     let response = await profileAPI.saveProfile(profile);
@@ -100,10 +102,17 @@ export const getUserStatus = (userId) => async (dispatch) => {
     dispatch(setUserStatus(response.data));
 }
 export const updateUserStatus = (status) => async (dispatch) => {
-    let response = await profileAPI.updateStatus(status)
-    if (response.data.resultCode === 0) {
-        dispatch(setUserStatus(status));
+    try {
+
+        let response = await profileAPI.updateStatus(status)
+        if (response.data.resultCode === 0) {
+            dispatch(setUserStatus(status));
+        }
+    }catch (e) {
+        errorMessage(e.message);
+
     }
+
 }
 
 

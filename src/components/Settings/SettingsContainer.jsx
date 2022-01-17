@@ -1,6 +1,6 @@
 import Settings from "./Settings";
 import {Navigate} from "react-router-dom";
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import {deleteUserProfile, getUserProfile, saveProfile} from "../../redux/profile-reducer";
 import Preloader from "../common/Preloader/Preloader";
@@ -8,15 +8,14 @@ import Preloader from "../common/Preloader/Preloader";
 const SettingsContainer = (props) => {
 
     useEffect(() => {
-        if (props.profile) {
-            if (props.id !== props.profile.userId) {
-                props.deleteUserProfile();
-            }
-        }
+
         if(props.id)
         props.getUserProfile(props.id)
+        return function(){
+            props.deleteUserProfile()
+        }
     }, [props.id]);
-    const a = < Preloader/>
+
     return (
         <>
             {props.isAuth ?
@@ -40,4 +39,4 @@ let mapStateToProps = (state) => ({
 
 })
 
-export default connect(mapStateToProps, {getUserProfile, deleteUserProfile,saveProfile})(SettingsContainer)
+export default connect(mapStateToProps, {getUserProfile, saveProfile, deleteUserProfile})(SettingsContainer)
