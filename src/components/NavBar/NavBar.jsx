@@ -71,10 +71,6 @@ const NavBar = (props) => {
                     </NavLink>
                 </li>
 
-                <li>
-                    <ul className={classes.side_bar_friends}>
-                    </ul>
-                </li>
             </ul>
         </nav>
     );

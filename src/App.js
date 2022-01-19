@@ -52,11 +52,14 @@ const App = (props) => {
                         <Route exact path='/profile/' element={<ProfileContainerHook />}>
                             <Route path=":userId" element={<ProfileContainerHook />}/>
                         </Route>
-                        <Route path='/dialogs' element={<DialogsContainer />}/>
+                        <Route path='/dialogs' element={<DialogsContainer />}>
+                            <Route path=':userId' element={<DialogsContainer />} />
+                        </Route>
+                        <Route path='/friends' element={<UsersContainer isFriends={true} />}/>
                         <Route path='/news' element={<News />}/>
                         <Route path='/music' element={<Music />}/>
                         <Route path='/settings' element={<SettingsContainer />}/>
-                        <Route path='/users' element={<UsersContainer />}/>
+                        <Route path='/users' element={<UsersContainer  isFriends={false} />}/>
                         <Route path='/login' element={<Login />}/>
                         <Route path='*' element={<div>404 NOT FOUND</div>}/>
                     </Routes>

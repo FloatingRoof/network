@@ -61,11 +61,11 @@ const usersReducer = (state = initialState, action) => {
 
 
 /* Thunks Creators*/
-export const requestUsers = (currentPage, pageSize) => {
+export const requestUsers = (currentPage, pageSize, isFriends) => {
     return async (dispatch) => {
         dispatch(toggleIsFetching(true));
         dispatch(setCurrentPage(currentPage));
-        let data = await usersAPI.getUsers(currentPage, pageSize);
+        let data = await usersAPI.getUsers(currentPage, pageSize, isFriends);
         dispatch(setTotalUsersCount(data.totalCount));
         dispatch(setUsers(data.items));
         dispatch(toggleIsFetching(false));

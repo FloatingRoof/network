@@ -21,12 +21,22 @@ class UsersContainer extends React.Component {
 
     componentDidMount() {
         const {currentPage, pageSize} = this.props;
-        this.props.getUsers(currentPage, pageSize);
+        this.props.getUsers(currentPage, pageSize, this.props.isFriends);
     }
+
+
+    componentDidUpdate(prevProps, prevState){
+        if(this.props.isFriends != prevProps.isFriends)
+        {
+            const {currentPage, pageSize} = this.props;
+            this.props.getUsers(currentPage, pageSize, this.props.isFriends);
+        }
+    }
+
 
     onPageChanged = (pageNumber) => {
         const {pageSize} = this.props;
-        this.props.getUsers(pageNumber, pageSize);
+        this.props.getUsers(pageNumber, pageSize, this.props.isFriends);
     }
 
     render() {
@@ -39,7 +49,9 @@ class UsersContainer extends React.Component {
                            users={this.props.users}
                            onPageChanged={this.onPageChanged}
                            followingIsProgress={this.props.followingIsProgress} follow={this.props.follow}
-                           unfollow={this.props.unfollow}/>}
+                           unfollow={this.props.unfollow}
+
+                    />}
             </>
         );
     }
