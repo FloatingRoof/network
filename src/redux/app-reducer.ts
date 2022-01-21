@@ -2,9 +2,6 @@ import {getAuthUserData} from "./auth-reducer";
 
 const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
 
-type InitialStateType = {
-    initialized: boolean
-}
 
 let initialState: InitialStateType = {
     initialized: false
@@ -36,11 +33,19 @@ export const initializedApp = () => (dispatch: Function) => {
 
 /* ActionCreators*/
 
-type InitializedSuccessActionType = {
-    type: typeof INITIALIZED_SUCCESS
-}
+
 export const initializedSuccess = (): InitializedSuccessActionType => (
     {
         type: INITIALIZED_SUCCESS
     }
 );
+
+
+//Types
+type InitialStateType = {
+    initialized: boolean
+}
+
+type InitializedSuccessActionType = {
+    type: typeof INITIALIZED_SUCCESS
+}

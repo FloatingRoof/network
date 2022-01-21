@@ -25,7 +25,7 @@ class UsersContainer extends React.Component {
     }
 
 
-    componentDidUpdate(prevProps, prevState){
+    componentDidUpdate(prevProps, prevState, snapshot){
         if(this.props.isFriends != prevProps.isFriends)
         {
             const {currentPage, pageSize} = this.props;

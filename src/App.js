@@ -59,7 +59,7 @@ const App = (props) => {
                         <Route path='/news' element={<News />}/>
                         <Route path='/music' element={<Music />}/>
                         <Route path='/settings' element={<SettingsContainer />}/>
-                        <Route path='/users' element={<UsersContainer  isFriends={false} />}/>
+                        <Route path='/users' element={<UsersContainer  isFriends={null} />}/>
                         <Route path='/login' element={<Login />}/>
                         <Route path='*' element={<div>404 NOT FOUND</div>}/>
                     </Routes>
