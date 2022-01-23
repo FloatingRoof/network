@@ -1,6 +1,7 @@
 import {profileAPI, usersAPI} from "../api/api";
 import {getAuthUserData} from "./auth-reducer";
 import {errorMessage} from "../utils/errorMessage";
+import {PhotosType, PostType, ProfileType} from "../types/types";
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -10,38 +11,6 @@ const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS';
 const DELETE_USER_PROFILE = 'DELETE_USER_PROFILE'
 
 // Инициализируем стор по умолчанию
-
-type ProfileType = {
-    userId:  number | null
-    lookingForAJob:   boolean | null
-    lookingForAJobDescription: string | null
-    fullName:  string | null
-    contacts: {
-        github:  string | null,
-        vk: string | null,
-        facebook:  string | null,
-        instagram:  string | null,
-        twitter: string | null,
-        website:  string | null,
-        youtube: string | null,
-        mainLink: string | null,
-    },
-    photos: PhotoType
-}
-
-type PhotoType = {
-    photos: {
-        small: string | null,
-        large: string | null
-    }
-}
-
-type PostType = {
-    id: number
-    post: string
-    likesCount: number
-
-}
 
 let initialState = {
     posts:  [
@@ -136,9 +105,9 @@ export const getUserStatus = (userId: number) => async (dispatch: any) => {
 
     dispatch(setUserStatus(response.data));
 }
+
 export const updateUserStatus = (status: string) => async (dispatch: any) => {
     try {
-
         let response = await profileAPI.updateStatus(status)
         if (response.data.resultCode === 0) {
             dispatch(setUserStatus(status));
@@ -152,15 +121,50 @@ export const updateUserStatus = (status: string) => async (dispatch: any) => {
 
 
 /*ActionCreators*/
-export const addPostActionCreator = (newPostText: string) =>
+
+type AddPostActionCreatorActionType = {
+    type: typeof ADD_POST
+    newPostText: string
+
+}
+
+export const addPostActionCreator = (newPostText: string) : AddPostActionCreatorActionType =>
     ({type: ADD_POST, newPostText});
 
+type SetUserProfileActionType = {
+    type: typeof SET_USER_PROFILE
+    profile: ProfileType
+}
 
-export const setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile});
-export const setUserStatus = (status: string) => ({type: SET_STATUS, status});
-export const deletePost = (postId: number) => ({type: DELETE_POST, postId});
-export const savePhotoSuccess = (photos: PhotoType) => ({type: SAVE_PHOTO_SUCCESS, photos});
-export const deleteUserProfile = () => ({type: DELETE_USER_PROFILE});
+export const setUserProfile = (profile: ProfileType): SetUserProfileActionType => ({type: SET_USER_PROFILE, profile});
+
+type SetUserStatusActionType = {
+    type: typeof SET_STATUS
+    status: string
+}
+
+export const setUserStatus = (status: string): SetUserStatusActionType => ({type: SET_STATUS, status});
+
+type DeletePostActionType = {
+    type: typeof DELETE_POST
+    postId: number
+}
+
+export const deletePost = (postId: number): DeletePostActionType => ({type: DELETE_POST, postId});
+
+type SavePhotoSuccessActionType = {
+    type: typeof SAVE_PHOTO_SUCCESS
+    photos: PhotosType
+}
+
+
+export const savePhotoSuccess = (photos: PhotosType): SavePhotoSuccessActionType => ({type: SAVE_PHOTO_SUCCESS, photos});
+
+type DeleteUserProfileActionType = {
+    type: typeof DELETE_USER_PROFILE
+}
+
+export const deleteUserProfile = (): DeleteUserProfileActionType => ({type: DELETE_USER_PROFILE});
 
 
 export default profileReducer;

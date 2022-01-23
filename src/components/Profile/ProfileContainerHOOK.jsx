@@ -15,12 +15,10 @@ import Preloader from "../common/Preloader/Preloader";
 
 const withRouter = WrappedComponent => props => {
     const params = useParams();
-    // etc... other react-router-dom v6 hooks
     return (
         <WrappedComponent
             {...props}
             params={params}
-            // etc...
         />
     );
 };
@@ -33,7 +31,7 @@ const ProfileContainerHook = (props) => {
 
     useEffect(() => {
 
-            let userId = props.params.userId ? props.params.userId : props.authorizedUserId;
+            let userId = props.params.userId || props.authorizedUserId;
             if (userId) {
                 props.getUserStatus(userId);
                 props.getUserProfile(userId);

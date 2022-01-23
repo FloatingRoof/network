@@ -16,7 +16,6 @@ import ProfileContainerHook from "./components/Profile/ProfileContainerHOOK";
 import {Navigate} from "react-router-dom";
 import {errorMessage} from "./utils/errorMessage";
 
-const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const Login = React.lazy(() => import('./components/Login/Login'));
 const SettingsContainer = React.lazy(() => import('./components/Settings/SettingsContainer'));
