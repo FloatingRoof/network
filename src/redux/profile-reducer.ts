@@ -3,12 +3,12 @@ import {getAuthUserData} from "./auth-reducer";
 import {errorMessage} from "../utils/errorMessage";
 import {PhotosType, PostType, ProfileType} from "../types/types";
 
-const ADD_POST = 'ADD-POST';
-const SET_USER_PROFILE = 'SET_USER_PROFILE';
-const SET_STATUS = 'SET_STATUS';
-const DELETE_POST = 'DELETE_POST';
-const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS';
-const DELETE_USER_PROFILE = 'DELETE_USER_PROFILE'
+const ADD_POST = 'network/profile/ADD-POST';
+const SET_USER_PROFILE = 'network/profile/SET_USER_PROFILE';
+const SET_STATUS = 'network/profile/SET_STATUS';
+const DELETE_POST = 'network/profile/DELETE_POST';
+const SAVE_PHOTO_SUCCESS = 'network/profile/SAVE_PHOTO_SUCCESS';
+const DELETE_USER_PROFILE = 'network/profile/DELETE_USER_PROFILE'
 
 // Инициализируем стор по умолчанию
 
@@ -114,7 +114,6 @@ export const updateUserStatus = (status: string) => async (dispatch: any) => {
         }
     } catch (e: any) {
         errorMessage(e.message);
-
     }
 
 }
@@ -159,6 +158,7 @@ type SavePhotoSuccessActionType = {
 
 
 export const savePhotoSuccess = (photos: PhotosType): SavePhotoSuccessActionType => ({type: SAVE_PHOTO_SUCCESS, photos});
+
 
 type DeleteUserProfileActionType = {
     type: typeof DELETE_USER_PROFILE

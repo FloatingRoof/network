@@ -48,6 +48,7 @@ const App = (props) => {
                 <Suspense fallback={ <Preloader/> }>
                     <Routes>
                         <Route path="/" element={ <Navigate replace to="/profile" /> }/>
+                        <Route path="/network" element={ <Navigate replace to="/profile" /> }/>
                         <Route exact path='/profile/' element={<ProfileContainerHook />}>
                             <Route path=":userId" element={<ProfileContainerHook />}/>
                         </Route>

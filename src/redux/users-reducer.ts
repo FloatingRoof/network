@@ -1,11 +1,11 @@
 import {usersAPI} from "../api/api";
-import {PhotosType, UserType} from "../types/types";
-const TOGGLE_FOLLOW = 'TOGGLE_FOLLOW';
-const SET_USERS = 'SET_USERS';
-const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
-const SET_TOTAL_USER_COUNT = 'SET_TOTAL_USER_COUNT';
-const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
-const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS';
+import { UserType} from "../types/types";
+const TOGGLE_FOLLOW = 'network/users/TOGGLE_FOLLOW';
+const SET_USERS = 'network/users/SET_USERS';
+const SET_CURRENT_PAGE = 'network/users/SET_CURRENT_PAGE';
+const SET_TOTAL_USER_COUNT = 'network/users/SET_TOTAL_USER_COUNT';
+const TOGGLE_IS_FETCHING = 'network/users/TOGGLE_IS_FETCHING';
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'network/users/TOGGLE_IS_FOLLOWING_PROGRESS';
 
 
 

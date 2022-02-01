@@ -10,10 +10,10 @@ let Users = (props) => {
                        totalItemsCount={props.totalUsersCount} pageSize={props.pageSize}/>
             <div>
                 {
-                    props.users.map(
-                        u => <User user={u} followingIsProgress={props.followingIsProgress}
-                                   unfollow={props.unfollow} follow={props.follow} key={u.id}/>
-                    )
+                        props.users.map(
+                            u => <User user={u} followingIsProgress={props.followingIsProgress}
+                                       unfollow={props.unfollow} follow={props.follow} key={u.id}/>
+                        )
                 }
             </div>
 

@@ -63,7 +63,7 @@ const LoginForm = (props) => {
                         </div>
                         }
                         <div className={classes.blockButton}>
-                            <button className={classes.button} type='submit'
+                                <button className={classes.button} type='submit'
                                     disabled={!formik.isValid || formik.isSubmitting}>
                                 {formik.isSubmitting ?
                                     <Preloader w="45px" h="45px"/>

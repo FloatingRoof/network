@@ -1,11 +1,11 @@
 import {getAuthUserData} from "./auth-reducer";
 
-const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
-
+const INITIALIZED_SUCCESS = 'network/app/INITIALIZED_SUCCESS';
 
 let initialState: InitialStateType = {
     initialized: false
 }
+
 export const appReducer = (state = initialState, action: InitializedSuccessActionType): InitialStateType => {
     switch (action.type) {
         case INITIALIZED_SUCCESS:
@@ -19,8 +19,6 @@ export const appReducer = (state = initialState, action: InitializedSuccessActio
 }
 
 /*ThunkCreators*/
-
-
 export const initializedApp = () => (dispatch: Function) => {
     let promise = dispatch(getAuthUserData())
 
@@ -32,14 +30,11 @@ export const initializedApp = () => (dispatch: Function) => {
 
 
 /* ActionCreators*/
-
-
 export const initializedSuccess = (): InitializedSuccessActionType => (
     {
         type: INITIALIZED_SUCCESS
     }
 );
-
 
 //Types
 type InitialStateType = {

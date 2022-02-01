@@ -10,7 +10,6 @@ import {
 import {connect} from "react-redux";
 import {Navigate, useMatch, useParams} from "react-router-dom";
 import {compose} from "redux";
-import Preloader from "../common/Preloader/Preloader";
 
 
 const withRouter = WrappedComponent => props => {

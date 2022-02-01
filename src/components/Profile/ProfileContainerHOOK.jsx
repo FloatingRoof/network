@@ -31,7 +31,7 @@ const ProfileContainerHook = (props) => {
 
     useEffect(() => {
 
-            let userId = props.params.userId || props.authorizedUserId;
+            let userId = props.params.userId ?? props.authorizedUserId;
             if (userId) {
                 props.getUserStatus(userId);
                 props.getUserProfile(userId);
@@ -43,9 +43,6 @@ const ProfileContainerHook = (props) => {
         }
         , [props.params.userId, props.authorizedUserId])
 
-    useEffect(() => {
-
-    })
 
     return (
         <>
